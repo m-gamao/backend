@@ -1,9 +1,9 @@
 module Api
   class MessagesController < ApplicationController
-    # ✅ Disable CSRF protection for API requests (since Angular frontend won't send CSRF tokens)
+    # Disable CSRF protection for API requests (since Angular frontend won't send CSRF tokens)
     skip_before_action :verify_authenticity_token
 
-    # ✅ Assign a unique session ID per browser (via cookies)
+    # Assign a unique session ID per browser (via cookies)
     before_action :set_session_id
 
     def create
@@ -36,7 +36,7 @@ module Api
         end
     
       rescue => e
-        Rails.logger.error "❌ Error in MessagesController#create: #{e.class} - #{e.message}"
+        Rails.logger.error "Error in MessagesController#create: #{e.class} - #{e.message}"
         Rails.logger.error e.backtrace.join("\n")
         render json: { error: "Server error: #{e.message}" }, status: :internal_server_error
       end
@@ -44,7 +44,7 @@ module Api
     
 
     def index
-      # ✅ Return messages associated with this session ID
+      # Return messages associated with this session ID
       messages = Message.where(session_id: @session_id).order(created_at: :desc)
       render json: messages.as_json(only: [:id, :body, :phone, :created_at])
     end
