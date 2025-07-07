@@ -4,7 +4,10 @@ ruby '3.2.4'
 
 gem 'rails', '~> 7.0.8'
 gem 'mongoid', '~> 7.5'
+gem 'twilio-ruby'
+gem 'rack-cors'
 
+gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 
